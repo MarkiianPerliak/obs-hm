@@ -1,0 +1,24 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+.image-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+img {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    height: 200px;
+    background-color: #f0f0f0;
+    object-fit: cover;
+    filter: blur(5px);
+    transition: filter 0.3s ease-in-out;
+}
+
+img.loaded {
+    filter: none;
+}
