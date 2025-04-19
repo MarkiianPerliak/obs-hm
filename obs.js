@@ -1,32 +1,28 @@
-const imagesToLoad = document.querySelectorAll('img[data-src]');
-const loadAllButton = document.getElementById('loadAllButton');
+const imageElements = document.querySelectorAll(".image");
+const buttonElement = document.querySelector("button");
 
-const loadImage = (img) => {
-    img.src = img.dataset.src;
-    img.removeAttribute('data-src');
-    img.classList.add('loaded');
+const observerSettings = {
+    rootMargin: "0px",
 };
 
-const imgObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            loadImage(entry.target);
-            observer.unobserve(entry.target);
+const observerCallback = (arrayImages, observer) => {
+    arrayImages.forEach((image) => {
+        if (image.isIntersecting) {
+            const photo = image.target;
+            photo.classList.add("animation");
         }
     });
-}, {
-    rootMargin: '0px 0px 200px 0px'
+};
+
+const obServer = new IntersectionObserver(observerCallback, observerSettings);
+
+imageElements.forEach((image) => {
+    obServer.observe(image);
 });
 
-imagesToLoad.forEach(img => {
-    imgObserver.observe(img);
-});
-
-loadAllButton.addEventListener('click', () => {
-    const remainingImagesToLoad = document.querySelectorAll('img[data-src]');
-    remainingImagesToLoad.forEach(img => {
-        loadImage(img);
+buttonElement.addEventListener("click", (event) => {
+    imageElements.forEach((image) => {
+        obServer.unobserve(image);
+        image.classList.add("animation")
     });
-    loadAllButton.disabled = true;
-    loadAllButton.innerText = 'Всі зображення завантажено';
 });

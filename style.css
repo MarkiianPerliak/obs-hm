@@ -1,24 +1,19 @@
-body {
-    font-family: sans-serif;
-    margin: 20px;
+ul {
+    list-style: none;
 }
 
-.image-container {
-    margin-bottom: 20px;
-    text-align: center;
+.image {
+    width: 1000px;
+    transform: scale(0);
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition-duration: 2s;
+    border-radius: 10%;
 }
 
-img {
-    display: block;
-    width: 100%;
-    max-width: 600px;
-    height: 200px;
-    background-color: #f0f0f0;
-    object-fit: cover;
-    filter: blur(5px);
-    transition: filter 0.3s ease-in-out;
-}
-
-img.loaded {
-    filter: none;
+.animation {
+    transform: scale(100%);
+    transition-property: transform, opacity;
+    transition-duration: 2s;
+    opacity: 1;
 }
